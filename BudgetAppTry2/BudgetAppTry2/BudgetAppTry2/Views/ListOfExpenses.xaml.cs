@@ -1,30 +1,23 @@
-﻿using System;
+﻿using BudgetAppTry2.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using BudgetAppTry2.Models;
-using System.Web;
 
 namespace BudgetAppTry2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListOfExpenses : ContentPage
     {
-       // private List<ExpenseCategoryIcon> categoryexpenses;
+        // private List<ExpenseCategoryIcon> categoryexpenses;
         private List<string> expensesname;
-        
+
 
         public ListOfExpenses()
         {
             InitializeComponent();
-            
+
             /* categoryexpenses = new List<ExpenseCategoryIcon>();
             categoryexpenses.Add(new ExpenseCategoryIcon("Entertainment",IconCategory.Entertainment));
             categoryexpenses.Add(new ExpenseCategoryIcon("Utility", IconCategory.Utility));
@@ -66,9 +59,9 @@ namespace BudgetAppTry2.Views
 
              }) ;*/
 
-            Selectedcategory.ItemsSource = expensesname;
-          Itemchoose.SetBinding(Label.TextProperty, new Binding("SelectedItem", source: Selectedcategory));
-           // Chooseimage.Source = ImageSource.FromResource("BudgetAppTry2.Views.Assets.Entertainment.png");
+            Selectedcategory.ItemsSource= expensesname;
+            Itemchoose.SetBinding(Label.TextProperty, new Binding("SelectedItem", source: Selectedcategory));
+            // Chooseimage.Source = ImageSource.FromResource("BudgetAppTry2.Views.Assets.Entertainment.png");
 
         }
         protected override void OnAppearing()
@@ -77,6 +70,9 @@ namespace BudgetAppTry2.Views
             if (Expenses != null && !string.IsNullOrEmpty(Expenses.Filename))
             {
                 Expenseslist.Text = File.ReadAllText(Expenses.Filename);
+                //Itemchoose.Text = File.ReadAllText(Expenses.Filename);
+                //Itemchoose.SetBinding(Label.TextProperty, new Binding("SelectedItem", source: Selectedcategory));
+
             }
         }
         private void deletedetails_Clicked(object sender, EventArgs e)
@@ -90,7 +86,7 @@ namespace BudgetAppTry2.Views
             Navigation.PopModalAsync();
         }
 
-        private  async void savedetails_Clicked(object sender, EventArgs e)//working good.dont change it.
+        private async void savedetails_Clicked(object sender, EventArgs e)//working good.dont change it.
         {
             var Expenses = (ExpenseCategoryIcon)BindingContext;
             if (Expenses == null || string.IsNullOrEmpty(Expenses.Filename))
@@ -99,7 +95,9 @@ namespace BudgetAppTry2.Views
                 Expenses.Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     $"{Path.GetRandomFileName()}.budget.notes.txt");
             }
-            File.WriteAllText(Expenses.Filename, Expenseslist.Text);
+            var bothtexts = $"{Expenseslist.Text} {Itemchoose.Text}";
+            File.WriteAllText(Expenses.Filename,bothtexts);
+           // File.WriteAllText(Expenses.Filename,Expenseslist.Text);
             
 
             if (Navigation.ModalStack.Count > 0)
@@ -111,7 +109,10 @@ namespace BudgetAppTry2.Views
                 Shell.Current.CurrentItem = (Shell.Current as AppShell).MainPageContent;
             }
         }
-        
 
+        private void Back_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new MainPage());
+        }
     }
 }

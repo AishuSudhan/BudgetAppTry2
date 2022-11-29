@@ -13,7 +13,7 @@
                         HeightRequest="100"
                         Placeholder="Enter your expenses"/>
             <Label x:Name="Itemchoose"/>
-                <Picker x:Name="Selectedcategory" Title="Select Category" TextColor="DarkOrchid" 
+                <Picker x:Name="Selectedcategory" Title="Select Category"  TextColor="DarkOrchid" 
                     />
                 <Image x:Name="Chooseimage"  HeightRequest="100" WidthRequest="100" Source=""/>
             
@@ -27,11 +27,11 @@
                 <Button Text="Save" BackgroundColor="Chartreuse" x:Name="savedetails" Clicked="savedetails_Clicked"/>
                 <Button Grid.Column="1" Text="Delete" BackgroundColor="Coral" x:Name="deletedetails" Clicked="deletedetails_Clicked"/>
             </Grid>
-            
+
+            <Button x:Name="Back" Text="Go Back" HeightRequest="80" BackgroundColor="LightBlue"  Clicked="Back_Clicked"/>
 
 
 
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -15,9 +15,10 @@
                      Priority="0"
                      Clicked="ToolbarItem_Clicked"/>
 
-       <ToolbarItem Text="bgt" IconImageSource="Resources/drawable/BudgetIcon.jpg"
+       <ToolbarItem   IconImageSource="Resources/drawable/BudgetIcon.jpg"
                    Order="Secondary"   
                     />
+        
 
         
     </ContentPage.ToolbarItems>
@@ -28,7 +29,7 @@
             
             <ListView  x:Name="Amtset" 
               ItemSelected="Amtset_ItemSelected"
-                      HeightRequest="50">
+                      HeightRequest="100">
 
                 <ListView.ItemTemplate>
             <DataTemplate x:DataType="model:ExpenseCategoryIcon">

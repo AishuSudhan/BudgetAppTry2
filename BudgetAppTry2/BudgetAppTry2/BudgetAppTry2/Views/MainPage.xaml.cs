@@ -27,7 +27,7 @@ namespace BudgetAppTry2.Views
         protected override void OnAppearing()
         {
 
-            var setamount = new BudgetAppTry();
+            var setamount = new List<BudgetAppTry>();
             var files = Directory.EnumerateFiles(Environment.GetFolderPath
                 (Environment.SpecialFolder.LocalApplicationData), "*.notes.txt");
             foreach (var file in files)
@@ -38,9 +38,11 @@ namespace BudgetAppTry2.Views
                     BudgetAmount = File.ReadAllText(file),
                     Date = File.GetCreationTime(file)
                 };
-               
+                setamount.Add(budamt);
             }
-            // bgt.Itemsource = setamount;
+            // this is the place i have to write code to bind toolbar item amount to show in mainpage.
+           
+            //ExpenseCategoryItem is for list of expense details
             var budgets = new List<ExpenseCategoryIcon>();
             var budgetfiles = Directory.EnumerateFiles(
                  Environment.GetFolderPath
@@ -53,7 +55,7 @@ namespace BudgetAppTry2.Views
                 {
                     Text = File.ReadAllText(budgetfile),
                     Filename=budgetfile,
-                    Date=File.GetCreationTime(budgetfile),
+                    Date=File.GetCreationTime(budgetfile)
                     
                 };
                 budgets.Add(budget);
@@ -65,7 +67,8 @@ namespace BudgetAppTry2.Views
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new BudgetAmountPage());
-
+            
+              
         }
 
         private void Amtset_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -73,7 +76,7 @@ namespace BudgetAppTry2.Views
             Navigation.PushModalAsync(new ListOfExpenses
             {
                 BindingContext = (ExpenseCategoryIcon)e.SelectedItem
-            }).Wait();
+            });
         }
 
         /* if (budgetfiles.Count() > 0)
