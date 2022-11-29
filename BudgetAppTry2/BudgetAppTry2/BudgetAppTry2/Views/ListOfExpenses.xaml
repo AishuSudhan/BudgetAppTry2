@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BudgetAppTry2.Views.ListOfExpenses"
+             >
+
+
+    <ContentPage.Content>
+        <StackLayout>
+
+
+            <Editor x:Name="Expenseslist"
+                        HeightRequest="100"
+                        Placeholder="Enter your expenses"/>
+            <Label x:Name="Itemchoose"/>
+                <Picker x:Name="Selectedcategory" Title="Select Category" TextColor="DarkOrchid" 
+                    />
+                <Image x:Name="Chooseimage"  HeightRequest="100" WidthRequest="100" Source=""/>
+            
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Save" BackgroundColor="Chartreuse" x:Name="savedetails" Clicked="savedetails_Clicked"/>
+                <Button Grid.Column="1" Text="Delete" BackgroundColor="Coral" x:Name="deletedetails" Clicked="deletedetails_Clicked"/>
+            </Grid>
+            
+
+
+
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
