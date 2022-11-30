@@ -15,7 +15,7 @@
             <Label x:Name="Itemchoose"/>
                 <Picker x:Name="Selectedcategory" Title="Select Category"  TextColor="DarkOrchid" 
                     />
-                <Image x:Name="Chooseimage"  HeightRequest="100" WidthRequest="100" Source=""/>
+                
             
 
             <Grid>

@@ -16,32 +16,55 @@ namespace BudgetAppTry2.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
+        public string budgetappamount;
         public MainPage()
         {
             InitializeComponent();
-            
-           
-        }
 
-    
-        protected override void OnAppearing()
-        {
-
-            var setamount = new List<BudgetAppTry>();
+          var setamount = new BudgetAppTry();
             var files = Directory.EnumerateFiles(Environment.GetFolderPath
-                (Environment.SpecialFolder.LocalApplicationData), "*.notes.txt");
+               (Environment.SpecialFolder.LocalApplicationData), "*.notes.txt");
             foreach (var file in files)
             {
-                var budamt = new BudgetAppTry
+                setamount = new BudgetAppTry
+
                 {
                     FileName = file,
                     BudgetAmount = File.ReadAllText(file),
-                    Date = File.GetCreationTime(file)
+                    // Date = File.GetCreationTime(file)
                 };
-                setamount.Add(budamt);
+
+
+                budgetappamount= File.ReadAllText(setamount.FileName);
+                
             }
-            // this is the place i have to write code to bind toolbar item amount to show in mainpage.
+        }
+
+
+        protected override void OnAppearing()
+        {
+           Userbudgetamount.IsVisible = true;
+            ChangeBudget.IsVisible = true;
+            /* var setamount = new BudgetAppTry();
+               var files = Directory.EnumerateFiles(Environment.GetFolderPath
+                  (Environment.SpecialFolder.LocalApplicationData), "*.notes.txt");
+             foreach (var file in files)
+             {
+                 setamount = new BudgetAppTry
+
+                 {
+                     FileName = file,
+                     BudgetAmount = File.ReadAllText(file),
+                     // Date = File.GetCreationTime(file)
+                 };
+
+                 Userbudgetamount.IsVisible = true;*/
+            Userbudgetamount.Text = budgetappamount;
            
+
+            
+            // this is the place i have to write code to bind toolbar item amount to show in mainpage.
+
             //ExpenseCategoryItem is for list of expense details
             var budgets = new List<ExpenseCategoryIcon>();
             var budgetfiles = Directory.EnumerateFiles(
@@ -60,7 +83,9 @@ namespace BudgetAppTry2.Views
                 };
                 budgets.Add(budget);
             }
-           Amtset.ItemsSource = budgets.OrderByDescending(t=>t.Date);
+            
+
+            Amtset.ItemsSource = budgets.OrderByDescending(t=>t.Date);
           
         }
 
@@ -77,6 +102,20 @@ namespace BudgetAppTry2.Views
             {
                 BindingContext = (ExpenseCategoryIcon)e.SelectedItem
             });
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Notification","your budget amount is already set","ok");
+           
+           
+        }
+
+        private void ChangeBudget_Clicked(object sender, EventArgs e)
+        {
+            Userbudgetamount.Text = string.Empty;
+            Userbudgetamount.IsVisible = false;
+            ChangeBudget.IsVisible = false;
         }
 
         /* if (budgetfiles.Count() > 0)

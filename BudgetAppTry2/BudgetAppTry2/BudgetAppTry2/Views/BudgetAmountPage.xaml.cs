@@ -24,6 +24,7 @@ namespace BudgetAppTry2.Views
             if ( Budgetamt!= null && !string.IsNullOrEmpty(Budgetamt.FileName))
             {
                 YourBudgetAmount.Text = File.ReadAllText(Budgetamt.FileName);
+                
             }
         }
 
@@ -37,6 +38,7 @@ namespace BudgetAppTry2.Views
                     $"{Path.GetRandomFileName()}.notes.txt");
             }
             File.WriteAllText(budamount.FileName, YourBudgetAmount.Text);
+            
             if (Navigation.ModalStack.Count > 0)
             {
                 await Navigation.PopModalAsync();
@@ -56,8 +58,17 @@ namespace BudgetAppTry2.Views
             {
                 File.Delete(budamt.FileName);
             }
+           YourBudgetAmount.Text = string.Empty;
+            Navigation.PopModalAsync();
+
+            var budamts = (ExpenseCategoryIcon)BindingContext;
+            if (File.Exists(budamts.Filename))
+            {
+                File.Delete(budamts.Filename);
+            }
             YourBudgetAmount.Text = string.Empty;
             Navigation.PopModalAsync();
+
         }
     }
 }

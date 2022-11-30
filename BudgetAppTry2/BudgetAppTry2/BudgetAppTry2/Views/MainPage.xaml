@@ -2,45 +2,55 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BudgetAppTry2.Views.MainPage"
-             xmlns:model="clr-namespace:BudgetAppTry2.Models"
-             Title="Budget Amount">
-    
-        
-   
+             xmlns:model="clr-namespace:BudgetAppTry2.Models">
+
+
+
+
     <ContentPage.ToolbarItems>
 
 
-        <ToolbarItem   Text="EnterYourBudget"
+        <ToolbarItem  
                      Order="Primary"
                      Priority="0"
-                     Clicked="ToolbarItem_Clicked"/>
-
-       <ToolbarItem   IconImageSource="Resources/drawable/BudgetIcon.jpg"
-                   Order="Secondary"   
-                    />
+                     Clicked="ToolbarItem_Clicked"
+                     Text="Budget Amount"/>
         
 
-        
     </ContentPage.ToolbarItems>
+           
+       
+    
+
     <ContentPage.Content>
-        
         <StackLayout>
             
-            
+                <Button  x:Name="Userbudgetamount"
+        Text="Userbudgetamount"
+            BackgroundColor="DarkSalmon" HeightRequest="50" WidthRequest="50"
+            Clicked="Button_Clicked" IsVisible="false"
+                        
+                    />
+
+            <Button x:Name="ChangeBudget" HeightRequest="50" IsVisible="false"
+                    Text="Change your budget" Clicked="ChangeBudget_Clicked" BackgroundColor="Aquamarine"/>
+
             <ListView  x:Name="Amtset" 
               ItemSelected="Amtset_ItemSelected"
                       HeightRequest="100">
 
-                <ListView.ItemTemplate>
-            <DataTemplate x:DataType="model:ExpenseCategoryIcon">
-                        
-                        <TextCell Text="{Binding Text}"
-                          Detail="{Binding Date}"/>
-                        
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:ExpenseCategoryIcon">
 
-                    </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                            <TextCell Text="{Binding Text}"
+                          Detail="{Binding Date}"/>
+
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            
         </StackLayout>
         
     </ContentPage.Content>
