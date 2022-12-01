@@ -25,13 +25,7 @@ namespace BudgetAppTry2.Models
         public string Filename { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
-       /* public ExpenseCategoryIcon(string text,IconCategory category)
-            {
-            Text = text;
-            Iconcategory = category;
-            ImageFile = $"Resources/drawable/{category}.png";
-            
-            }*/
+       
         }
 
     }

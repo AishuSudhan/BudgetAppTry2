@@ -10,7 +10,7 @@ namespace BudgetAppTry2.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListOfExpenses : ContentPage
     {
-        // private List<ExpenseCategoryIcon> categoryexpenses;
+
         private List<string> expensesname;
 
 
@@ -18,13 +18,7 @@ namespace BudgetAppTry2.Views
         {
             InitializeComponent();
 
-            /* categoryexpenses = new List<ExpenseCategoryIcon>();
-            categoryexpenses.Add(new ExpenseCategoryIcon("Entertainment",IconCategory.Entertainment));
-            categoryexpenses.Add(new ExpenseCategoryIcon("Utility", IconCategory.Utility));
-            categoryexpenses.Add(new ExpenseCategoryIcon("Tuition", IconCategory.Tuition));
-            categoryexpenses.Add(new ExpenseCategoryIcon("Medical", IconCategory.Medical));
-            categoryexpenses.Add(new ExpenseCategoryIcon("Insurance", IconCategory.Insurance));*/
-
+            //this is the code for the list that shows on picker dropdown.
 
             expensesname = new List<string>();
             expensesname.Add("Entertainment");
@@ -32,37 +26,11 @@ namespace BudgetAppTry2.Views
             expensesname.Add("Tuition");
             expensesname.Add("Medical");
             expensesname.Add("Insurance");
-            /* {
-                // ImageFile = "Resources/drawable/Entertainment.png",
-                // Iconcategory = IconCategory.Entertainment,
-
-         });
-             categoryexpenses.Add(new ExpenseCategoryIcon
-                 {
-                 //ImageFile = "Resources/drawable/Medical.png",
-                 Iconcategory = IconCategory.Medical
-             });
-             categoryexpenses.Add(new ExpenseCategoryIcon
-             {
-                // ImageFile = "Resources/drawable/Insurance.png",
-                 Iconcategory = IconCategory.Insurance
-             });
-             categoryexpenses.Add(new ExpenseCategoryIcon
-             {
-                // ImageFile = "Resources/drawable/Tuition.png",
-                 Iconcategory = IconCategory.Tuition
-             });
-             categoryexpenses.Add(new ExpenseCategoryIcon
-             {
-                 //ImageFile = "Resources/drawable/Utility.png",
-                 Iconcategory = IconCategory.Utility,
-
-             }) ;*/
-
-            Selectedcategory.ItemsSource= expensesname;
+            Selectedcategory.ItemsSource= expensesname;//this is how i bind the selected dropdown item show in picker.
             Itemchoose.SetBinding(Label.TextProperty, new Binding("SelectedItem", source: Selectedcategory));
-            // Chooseimage.Source = ImageSource.FromResource("BudgetAppTry2.Views.Assets.Entertainment.png");
-
+            //itemchoose is the label name i am using that to diplay the selected item on picker.that is extra. 
+            //but i am using that label to do string concatination along with editors text to show both editor text and category selected inpicker
+            // to display in the mainpage listview.
         }
         protected override void OnAppearing()
         {
@@ -70,8 +38,6 @@ namespace BudgetAppTry2.Views
             if (Expenses != null && !string.IsNullOrEmpty(Expenses.Filename))
             {
                 Expenseslist.Text = File.ReadAllText(Expenses.Filename);
-                //Itemchoose.Text = File.ReadAllText(Expenses.Filename);
-                //Itemchoose.SetBinding(Label.TextProperty, new Binding("SelectedItem", source: Selectedcategory));
 
             }
         }
@@ -86,18 +52,20 @@ namespace BudgetAppTry2.Views
             Navigation.PopModalAsync();
         }
 
-        private async void savedetails_Clicked(object sender, EventArgs e)//working good.dont change it.
+        private async void savedetails_Clicked(object sender, EventArgs e)
         {
             var Expenses = (ExpenseCategoryIcon)BindingContext;
             if (Expenses == null || string.IsNullOrEmpty(Expenses.Filename))
             {
                 Expenses = new ExpenseCategoryIcon();
+                //using two different filenames to store data one file is for budgetamount and second one is for expense details.
+                //differenciate them by adding different name after "." eg ".amountnotes"
                 Expenses.Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    $"{Path.GetRandomFileName()}.budget.notes.txt");
+                    $"{Path.GetRandomFileName()}.budget.amountnotes.txt");
             }
             var bothtexts = $"{Expenseslist.Text} {Itemchoose.Text}";
             File.WriteAllText(Expenses.Filename,bothtexts);
-           // File.WriteAllText(Expenses.Filename,Expenseslist.Text);
+           
             
 
             if (Navigation.ModalStack.Count > 0)

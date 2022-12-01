@@ -23,8 +23,8 @@
                         Text="Save"
                         BackgroundColor="DarkMagenta"
                         Clicked="Save_Clicked"/>
-                <Button Grid.Column="1" x:Name="Delete"
-                        Text="Delete" Clicked="Delete_Clicked"
+                <Button Grid.Column="1" x:Name="Back"
+                        Text="back" Clicked="Back_Clicked"
                         BackgroundColor="DarkOrange"/>
             </Grid>
         </StackLayout>

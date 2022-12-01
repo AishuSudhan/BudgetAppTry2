@@ -18,31 +18,29 @@
         
 
     </ContentPage.ToolbarItems>
-           
-       
-    
 
     <ContentPage.Content>
         <StackLayout>
-            
-                <Button  x:Name="Userbudgetamount"
-        Text="Userbudgetamount"
-            BackgroundColor="DarkSalmon" HeightRequest="50" WidthRequest="50"
-            Clicked="Button_Clicked" IsVisible="false"
-                        
-                    />
 
-            <Button x:Name="ChangeBudget" HeightRequest="50" IsVisible="false"
+            <Button  x:Name="Userbudgetamount"
+            Text="Userbudgetamount"
+            BackgroundColor="DarkSalmon" HeightRequest="50" WidthRequest="50"
+            Clicked="Button_Clicked" IsVisible="false"/>
+
+            
+                    <Button  x:Name="ChangeBudget" HeightRequest="50" IsVisible="false"
                     Text="Change your budget" Clicked="ChangeBudget_Clicked" BackgroundColor="Aquamarine"/>
 
-            <ListView  x:Name="Amtset" 
+                
+
+            <ListView  x:Name="Amtset"
               ItemSelected="Amtset_ItemSelected"
                       HeightRequest="100">
 
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="model:ExpenseCategoryIcon">
 
-                            <TextCell Text="{Binding Text}"
+                        <TextCell   Text="{Binding Text}"
                           Detail="{Binding Date}"/>
 
 

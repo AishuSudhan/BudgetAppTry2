@@ -51,24 +51,12 @@ namespace BudgetAppTry2.Views
             
         }
 
-        private void Delete_Clicked(object sender, EventArgs e)
+
+        private void Back_Clicked(object sender, EventArgs e)
         {
-            var budamt = (BudgetAppTry)BindingContext;
-            if (File.Exists(budamt.FileName))
-            {
-                File.Delete(budamt.FileName);
-            }
-           YourBudgetAmount.Text = string.Empty;
-            Navigation.PopModalAsync();
-
-            var budamts = (ExpenseCategoryIcon)BindingContext;
-            if (File.Exists(budamts.Filename))
-            {
-                File.Delete(budamts.Filename);
-            }
-            YourBudgetAmount.Text = string.Empty;
-            Navigation.PopModalAsync();
-
+            Navigation.PushModalAsync(new MainPage());
+            //going back to mainpage.
+            //we can do pop only if we have push.
         }
     }
 }
